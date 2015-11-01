@@ -1,0 +1,9 @@
+acme_store_homepage:
+    path:   /hello/{name}
+    defaults: { _controller: AcmeStoreBundle:Default:index }
+create:
+    path:   /create
+    defaults: { _controller: AcmeStoreBundle:Default:create }
+get_all:
+    path:   /all
+    defaults: { _controller: AcmeStoreBundle:Default:all }

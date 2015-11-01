@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: smile
+ * Date: 01.11.15
+ * Time: 11:24
+ */
+
+namespace Acme\StoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Product
+ */
+class Product {
+    protected $id;
+    protected $name;
+    protected $price;
+    protected $description;
+}

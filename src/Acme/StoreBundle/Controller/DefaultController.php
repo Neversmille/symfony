@@ -52,4 +52,5 @@ class DefaultController extends Controller
         return $this->render('AcmeStoreBundle:Default:all.html.twig', array('products' => $products));
 
     }
+    //test
 }

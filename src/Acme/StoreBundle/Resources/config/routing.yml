@@ -15,5 +15,5 @@ remove:
     defaults: { _controller: AcmeStoreBundle:Default:remove }
 pricemore:
     path:   /pricemore/{price}
-    defaults: { _controller: AcmeStoreBundle:Default:pricemore, price: 19.99 }
+    defaults: { _controller: AcmeStoreBundle:Default:pricemore, price: 20.00 }
     methods:  [GET, POST]

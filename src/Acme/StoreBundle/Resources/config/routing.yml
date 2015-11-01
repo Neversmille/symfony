@@ -7,3 +7,13 @@ create:
 get_all:
     path:   /all
     defaults: { _controller: AcmeStoreBundle:Default:all }
+update:
+    path:   /update/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:update }
+remove:
+    path:   /remove/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:remove }
+pricemore:
+    path:   /pricemore/{price}
+    defaults: { _controller: AcmeStoreBundle:Default:pricemore, price: 19.99 }
+    methods:  [GET, POST]

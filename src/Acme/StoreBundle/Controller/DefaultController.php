@@ -4,7 +4,9 @@ namespace Acme\StoreBundle\Controller;
 
 use Acme\StoreBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\Config\Definition\Exception\Exception;
+//use Symfony\Component\HttpFoundation\Response; //Без профайлера
+use Symfony\Component\BrowserKit\Response; //С профайлером
 
 class DefaultController extends Controller
 {
@@ -17,6 +19,7 @@ class DefaultController extends Controller
      */
     public function indexAction($name)
     {
+        dump($name);
         return $this->render('AcmeStoreBundle:Default:index.html.twig', array('name' => $name));
     }
 
@@ -52,5 +55,50 @@ class DefaultController extends Controller
         return $this->render('AcmeStoreBundle:Default:all.html.twig', array('products' => $products));
 
     }
-    //test
+
+    /**
+     * Обновление записи
+     *
+     * @param $id
+     * @return Response
+     */
+    public function updateAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository('AcmeStoreBundle:Product')->find($id);
+        dump($product);
+        if (!$product) {
+            throw $this->createNotFoundException('No product found ' . $id);
+        }
+        $product->setName('New product name!');
+        $em->flush();
+        return new Response('Updated');
+    }
+
+    /**
+     * Удаление записи
+     *
+     * @param $id
+     * @return Response
+     */
+    public function removeAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository('AcmeStoreBundle:Product')->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('No product found ' , $id);
+        }
+        $em->remove($product);
+        $em->flush();
+        return new Response('Deleted');
+    }
+
+    public function pricemoreAction($price) {
+        $repository = $this->getDoctrine()->getRepository('AcmeStoreBundle:Product');
+        $query = $repository->createQueryBuilder('p')
+            ->where('p.price > :price')
+            ->setParameter('price', $price)
+            ->orderBy('p.price', 'ASC')
+            ->getQuery();
+        $products = $query->getResult();
+        return $this->render('AcmeStoreBundle:Default:all.html.twig', array('products' => $products));
+    }
 }

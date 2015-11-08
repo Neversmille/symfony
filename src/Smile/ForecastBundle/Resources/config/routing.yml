@@ -1,0 +1,3 @@
+smile_forecast_homepage:
+    path:     /diplom/{name}
+    defaults: { _controller: SmileForecastBundle:Default:index }
